@@ -1,4 +1,5 @@
 
+import random
 from requests import get
 from config import config
 
@@ -14,8 +15,16 @@ class RandomImageFetcher:
 
     @staticmethod
     def __generate_random_image_url() -> str:
+        """
+        Generate a random image URL.
+        :return: The generated URL
+        """
 
-        config.data_api_baseurl
+        # Generate an image id between 1 and 5 (both included)
+        image_id = random.randint(1, 5)
+
+        # Return the URL
+        return f"{config.data_api_baseurl}/images/{image_id}.jpg"
 
     def download(self) -> bytes:
         """
