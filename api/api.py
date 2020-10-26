@@ -3,11 +3,13 @@ from io import BytesIO
 from PIL import Image
 from flask import Flask, send_file
 from flask_restx import Resource, Api
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from api.utils import RandomImageFetcher
 
 # Create the api
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 api = Api(app)
 
 
